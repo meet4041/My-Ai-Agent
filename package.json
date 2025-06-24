@@ -1,0 +1,19 @@
+{
+  "name": "first-agent",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "node --env-file=.env agent.js"
+  },
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "groq-sdk": "^0.25.0"
+  }
+}
