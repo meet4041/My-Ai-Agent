@@ -30,11 +30,7 @@ Follow these instructions to get the project up and running on your local machin
 
 2.  **Install dependencies:**
     ```sh
-    npm install
-    ```
-    or if you are using `bun`:
-    ```sh
-    bun install
+    pip install -r requirements.txt
     ```
 
 3.  **Set up your environment variables:**
