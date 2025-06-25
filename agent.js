@@ -12,6 +12,7 @@ async function callAgent() {
         input: process.stdin,
         output: process.stdout,
     })
+
     const messages = [
         {
             role: "system",
@@ -25,8 +26,6 @@ async function callAgent() {
             currentdate : ${new Date().toUTCString()}`,
         },
     ];
-
-
 
     // this is for user prompt loop 
     while (true) {
@@ -126,6 +125,7 @@ async function callAgent() {
                 console.log(`Assitant:${completion.choices[0].message.content}`);
                 break;
             }
+
             for (const tool of toolCalls) {
                 const functionName = tool.function.name
                 const functionArgs = tool.function.arguments
@@ -142,7 +142,6 @@ async function callAgent() {
                     result = getBalance(JSON.parse(functionArgs));
                 }
 
-
                 messages.push({
                     role: "tool",
                     content: result,
@@ -155,11 +154,8 @@ async function callAgent() {
             // console.log("Messages: ", messages);
             // console.log("-----------------------------------------");
             // console.log("DB: ", expenseDB);
-
-
         }
     }
-
     rl.close()
 }
 
@@ -171,7 +167,6 @@ callAgent();
 
 function getTotalExpense({ from, to }) {
     // console.log("Get Total Expense too!!");
-
     // in real we will call DV
     const expense = expenseDB.reduce((acc, item) => {
         return acc + item.amount;
@@ -186,7 +181,6 @@ function addExpense({ name, amount }) {
         amount,
     })
     return "Added to the DB.";
-
 }
 
 function addIncome({ name, amount }) {
