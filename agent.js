@@ -45,7 +45,9 @@ async function callAgent() {
         while (true) {
             const completion = await groq.chat.completions.create({
                 messages: messages,
-                model: "llama-3.1-70b-versatile",
+                model: "llama-3.3-70b-versatile",
+
+
                 tools: [
                     {
                         type: "function",
@@ -161,38 +163,25 @@ async function callAgent() {
 
 callAgent();
 
-/*
-    Get total expense
-*/
+/* ===== Tool Function Implementations ===== */
 
 function getTotalExpense({ from, to }) {
-    // console.log("Get Total Expense too!!");
-    // in real we will call DV
-    const expense = expenseDB.reduce((acc, item) => {
-        return acc + item.amount;
-    }, 0)
-    return `${expense} INR`;
+    const total = expenseDB.reduce((acc, item) => acc + item.amount, 0);
+    return `${total} INR`;
 }
 
 function addExpense({ name, amount }) {
-    // console.log(`Expense name: ${name} , Amount: ${amount}`);
-    expenseDB.push({
-        name,
-        amount,
-    })
-    return "Added to the DB.";
+    expenseDB.push({ name, amount: Number(amount) }); // ✅ type safety
+    return "Expense added successfully.";
 }
 
 function addIncome({ name, amount }) {
-    incomeDB.push({
-        name,
-        amount,
-    })
-    return "Added to the DB.";
+    incomeDB.push({ name, amount: Number(amount) }); // ✅ type safety
+    return "Income added successfully.";
 }
 
 function getBalance() {
-    const totalIncome = incomeDB.reduce((acc, item) => acc + item.amount, 0)
-    const totalExpense = expenseDB.reduce((acc, item) => acc + item.amount, 0)
-    return `${totalIncome - totalExpense} INR`;
+    const income = incomeDB.reduce((acc, item) => acc + item.amount, 0);
+    const expenses = expenseDB.reduce((acc, item) => acc + item.amount, 0);
+    return `${income - expenses} INR`;
 }
