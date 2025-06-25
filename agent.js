@@ -27,7 +27,7 @@ async function callAgent() {
         },
     ];
 
-    // this is for user prompt loop 
+    /* ===== User Prompt Implementations ===== */
     while (true) {
         const question = await rl.question("User: ");
 
@@ -41,7 +41,7 @@ async function callAgent() {
             content: question,
         });
 
-        // this is for agent
+        /* ===== Agent Implementations ===== */
         while (true) {
             const completion = await groq.chat.completions.create({
                 messages: messages,
@@ -149,7 +149,6 @@ async function callAgent() {
                     content: result,
                     tool_call_id: tool.id,
                 })
-
                 // console.log(JSON.stringify(completion2.choices[0], null, 2));
             }
             // console.log("-----------------------------------------");
@@ -171,12 +170,12 @@ function getTotalExpense({ from, to }) {
 }
 
 function addExpense({ name, amount }) {
-    expenseDB.push({ name, amount: Number(amount) }); // ✅ type safety
+    expenseDB.push({ name, amount: Number(amount) }); 
     return "Expense added successfully.";
 }
 
 function addIncome({ name, amount }) {
-    incomeDB.push({ name, amount: Number(amount) }); // ✅ type safety
+    incomeDB.push({ name, amount: Number(amount) }); 
     return "Income added successfully.";
 }
 
