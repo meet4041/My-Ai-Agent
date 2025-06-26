@@ -46,8 +46,6 @@ async function callAgent() {
             const completion = await groq.chat.completions.create({
                 messages: messages,
                 model: "llama-3.3-70b-versatile",
-
-
                 tools: [
                     {
                         type: "function",
@@ -170,12 +168,12 @@ function getTotalExpense({ from, to }) {
 }
 
 function addExpense({ name, amount }) {
-    expenseDB.push({ name, amount: Number(amount) }); 
+    expenseDB.push({ name, amount: Number(amount) });
     return "Expense added successfully.";
 }
 
 function addIncome({ name, amount }) {
-    incomeDB.push({ name, amount: Number(amount) }); 
+    incomeDB.push({ name, amount: Number(amount) });
     return "Income added successfully.";
 }
 
